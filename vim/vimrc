@@ -58,9 +58,9 @@ nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <leader>o :FufFile<cr>
 
 set backup
-set backupdir=c:/vim_tmp
+set backupdir=c:/vim_tmp,~/vim_tmp
 " set backupskip=blaablaa
-set directory=c:/vim_tmp
+set directory=c:/vim_tmp,~/vim_tmp
 set writebackup
 
 color evening
