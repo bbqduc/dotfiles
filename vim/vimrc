@@ -90,3 +90,4 @@ let g:rbpt_colorpairs = [
 color evening
 set guioptions-=T
 set guioptions-=m
+set guioptions-=r
