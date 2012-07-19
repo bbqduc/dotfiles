@@ -12,6 +12,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run
 import XMonad.Util.Loggers
+import XMonad.Layout.NoBorders
 import XMonad.Actions.CycleWS
 import Data.Monoid
 import System.Exit
@@ -64,7 +65,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | ~/yeganesh` && eval \"exec $exe\"")
+    , ((modm,               xK_p     ), spawn "exe=`dmenu_run | yeganesh` && eval \"exec $exe\"")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -184,7 +185,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full) ||| Full
+myLayout = smartBorders $ avoidStruts (tiled ||| Mirror tiled ||| Full) ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -253,8 +254,8 @@ myStartupHook = return ()
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do 
-       statuspipe <- spawnPipe "~/dzen2 -bg black -fg white -ta l -w 1120"
-       otherpipe <- spawnPipe "while [ 0 -eq 0 ]; do date;sleep 1; done | ~/dzen2 -bg black -fg white -ta r -x 800 -p"
+       statuspipe <- spawnPipe "dzen2 -bg black -fg white -ta l -w 1120"
+       otherpipe <- spawnPipe "while [ 0 -eq 0 ]; do date;sleep 1; done | dzen2 -bg black -fg white -ta r -x 800 -p"
 
        let myLogHook = dynamicLogWithPP $ defaultPP 
              { 
